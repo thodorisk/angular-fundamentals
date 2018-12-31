@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
- 
+
 import { Detail } from './details/detail';
 import { DETAILS } from './mock-details';
 

@@ -1,8 +1,8 @@
 <ul class="user-details">
-    <li *ngFor="let detail of details">
-      <b>Fullname: </b>{{detail.name + " " + detail.surname}}
-      <b>DateOfBirth: </b> {{ formatDate(detail.date) | date}}
-      <b>Age: </b> {{ calculateAge(detail.date) }}
-      <b>Status: </b> {{ formatStatus(detail.status) }}
+    <li *ngFor="let formatedDetail of formatedDetails">
+      <b>Fullname: </b>{{ formatedDetail.fullname }}
+      <b>DateOfBirth: </b> {{ formatedDetail.date | date}}
+      <b>Age: </b> {{ formatedDetail.age }}
+      <b>Status: </b> {{ formatedDetail.status }}
     </li>
 </ul>

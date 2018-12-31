@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 
 import { Detail } from './detail';
 import { DetailsService } from '../details.service';
 import {StatusTypes} from './detail'
+
+interface formatedDetail {
+  fullname: string;
+  date: Date;
+  age: number;
+  status: string;
+}
 
 @Component({
   selector: 'app-details',
@@ -13,7 +19,8 @@ import {StatusTypes} from './detail'
 
 export class DetailsComponent implements OnInit {
 
-details: Detail[];
+  details: Detail[];
+  formatedDetails: formatedDetail[];
 
   constructor(private detailsService : DetailsService) { }
 
@@ -25,7 +32,16 @@ details: Detail[];
     this.detailsService.getDetails()
       .subscribe(details => {
         this.details = details;
-    });
+      });
+
+      this.formatedDetails = this.details.map(obj => {
+        return {
+          fullname: obj.name + " " + obj.surname,
+          date: this.formatDate(obj.date),
+          age: this.calculateAge(obj.date),
+          status: this.formatStatus(obj.status)
+        }
+      });
   }
 
   calculateAge(dateOfBirth: string) : number {
