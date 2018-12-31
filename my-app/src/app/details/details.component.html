@@ -4,5 +4,6 @@
       <b>DateOfBirth: </b> {{ formatedDetail.date | date}}
       <b>Age: </b> {{ formatedDetail.age }}
       <b>Status: </b> {{ formatedDetail.status }}
+      <button (click)="buttonClicked(formatedDetail)">Show Fullname</button>
     </li>
 </ul>

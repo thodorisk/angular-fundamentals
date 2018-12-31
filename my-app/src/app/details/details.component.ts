@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Detail } from './detail';
-import { DetailsService } from '../details.service';
-import {StatusTypes} from './detail'
+import { StatusTypes } from './detail';
 
 interface formatedDetail {
   fullname: string;
@@ -19,21 +18,19 @@ interface formatedDetail {
 
 export class DetailsComponent implements OnInit {
 
-  details: Detail[];
+  @Input() details: Detail[];
+  @Output() buttonClick = new EventEmitter();
+  fullname : string;
+
   formatedDetails: formatedDetail[];
 
-  constructor(private detailsService : DetailsService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getDetails();
+    this.formatDetails();
   }
 
-  getDetails(): void {
-    this.detailsService.getDetails()
-      .subscribe(details => {
-        this.details = details;
-      });
-
+  formatDetails(): void {
       this.formatedDetails = this.details.map(obj => {
         return {
           fullname: obj.name + " " + obj.surname,
@@ -63,5 +60,10 @@ export class DetailsComponent implements OnInit {
     let actualDate = new Date(plainDate);
     
     return actualDate;
+  }
+
+  buttonClicked(arr: formatedDetail) {
+    this.fullname = arr.fullname;
+    this.buttonClick.emit(this.fullname);
   }
 }

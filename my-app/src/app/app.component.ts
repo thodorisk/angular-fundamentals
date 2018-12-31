@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Detail } from './details/detail';
+import { DetailsService } from './details.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,22 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'my-app';
+  details: Detail[];
+
+  constructor(private detailsService : DetailsService){};
+
+  ngOnInit() {
+    this.getDetails();
+  }
+
+  getDetails(): void {
+    this.detailsService.getDetails()
+      .subscribe(details => {
+        this.details = details;
+      });
+  }
+
+  showFullName(fullname) {
+    console.log(fullname);
+  }
 }
