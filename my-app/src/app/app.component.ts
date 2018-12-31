@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Detail } from './details/detail';
 import { DetailsService } from './details.service';
 
@@ -25,6 +25,7 @@ export class AppComponent {
   }
 
   showFullName(fullname) {
+    //Console logs just to see that components interact with each other.
     console.log(fullname);
   }
 }
